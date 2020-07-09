@@ -3,7 +3,7 @@
 
 name = "Asher"
 license = "MIT"
-licenselink = "https://github.com/yourname/yourtheme/blob/master/LICENSE"
+licenselink = "https://github.com/david-adewoyin/asher/blob/master/LICENSE"
 description = "A minimal hugo theme for personal usage"
 
 tags = ["minimal","personal"]
