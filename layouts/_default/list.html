@@ -1,0 +1,39 @@
+{{define "main"}} 
+
+    {{with .Params.Tagline}}
+    <h2 id="tagline">{{.}}</h2>
+    {{else}}
+    <h2 id="tagline">{{.Title}}</h2>
+    {{end}}
+   
+   
+
+{{$list := slice}}
+{{$cur := .}}
+<section class="article-section">
+    {{range .Pages}}
+     {{if .IsSection}}
+   
+    {{range .Pages }}
+    {{$list = $list | append .}}
+    
+    {{end}}
+  <a href="{{.RelPermalink}}">{{.Title}}</a>
+  {{else}}
+  
+  {{$list = $list | append . }} 
+{{end}} 
+{{end}} 
+</section>
+
+{{range $list}}
+<article class="blog-post">
+  <h3><a href="{{.RelPermalink}}">{{.Title}}</a>
+    {{ if  ne .Parent $cur }}
+    <small><a href="{{.Parent.RelPermalink}}">{{.Parent.Name}}</a></small>
+    {{end}}
+<i>{{.PublishDate.Format "Mon Jan 2 2006 " }}</i></h3>
+<p>{{.Summary }} ...</p>
+</article>
+{{end}}
+{{end}}

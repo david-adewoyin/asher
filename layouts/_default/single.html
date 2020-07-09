@@ -1,0 +1,33 @@
+{{define "main"}}
+<h1 class="title">{{.Title}}</h1>
+<i>{{.Date.Format "Jan 02,2006"}}</i>
+
+<article class="post">{{.Content}}</article>
+<section class="pagination">
+ 
+    {{ range .Parent.Pages.ByDate}}
+    {{ if gt $.Date.Unix  .Date.Unix  }}
+      {{ $.Scratch.Set "previous" .Permalink }}
+      {{ end }}
+      {{ end }}
+
+    {{ range .Parent.Pages.ByDate.Reverse}}
+    {{ if lt $.Date.Unix  .Date.Unix  }}
+    {{ $.Scratch.Set "next" .Permalink }}
+{{ end }}
+{{ end }}
+
+
+    {{if eq ($.Scratch.Get "previous") . }}
+   {{end}}
+    
+    <li><a href="{{ if $.Scratch.Get "next" }}{{ $.Scratch.Get "next" }} {{ end }}" class="{{ if not ($.Scratch.Get "next") }}disabled {{ end }}next" > < Previous </a></li>
+<li><a href="{{ if $.Scratch.Get "previous" }}{{ $.Scratch.Get "previous" }} {{ end }}" class="{{ if not ($.Scratch.Get "previous") }}disabled {{ end }}previous">Next > </a></li>
+
+
+
+  
+    </section>
+{{end}}
+
+

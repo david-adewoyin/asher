@@ -1,0 +1,36 @@
+<header class="header">
+  <nav>
+    <div class="nav-items">
+      {{- $cur := . -}} 
+      {{range .Site.Menus.main}}
+      <a  class="{{if or ($cur.IsMenuCurrent `main` .) ($cur.HasMenuCurrent `main` .) }} active{{end}}" href="{{ .URL }}" title="{{ .Title }}">{{.Name}}</a>
+      {{end}}
+    </div>
+    <div class="social-contact">
+      {{with .Site.Params.twitter}}
+      <a class="social-link" href="https://twitter.com/{{.}}" id="twitter">
+        <img src="/svg/twitter.svg" alt="twitter icon" />
+      </a>
+      {{end}}
+      {{with .Site.Params.github}}
+      <a class="social-link" href="https://github.com/{{.}}" id="github">
+        <img src="/svg/github.svg" alt="github icon"/>
+      </a>
+      {{end}}
+      {{with .Site.Params.linkedin}}
+      <a class="social-link" href="https://linkedin.com/{{.}}" id="linkedin">
+        <img src="/svg/linkedin.svg" alt="linkedin icon" />
+      </a>
+      {{end}}
+      {{with .Site.Params.email}}
+      <a class="social-link" href="mail:to{{.}}" id="email">
+        <img src="/svg/email.svg" alt="email icon" />
+      </a>
+      {{end}}
+    </div>
+  </nav>
+  {{if .IsHome}}
+  <h1>{{.Site.Title}}</h1>
+   <small>{{.Site.Params.Description}}</small>
+   {{end}}
+</header>
